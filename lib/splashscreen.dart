@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'choose.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -28,19 +29,19 @@ class _SplashscreenState extends State<Splashscreen> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color(0xFFFFC6C9),
-                Color(0xFFFFD7BE),
+                Color(0xFFFFD9DC),
+                Color(0xFFFFE5D8),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
           ),
-        child: const Center(
+        child: Center(
           child: Text(
             "YummyMate",
-            style: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 35,
+            style: GoogleFonts.tangerine(
+              fontWeight: FontWeight.w600,
+              fontSize: 52,
               color: Colors.black,
             ),
           ),

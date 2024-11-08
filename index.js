@@ -1,12 +1,10 @@
 const app = require("./app.js");
-const db = require("./config/db.js");
-const UserModel = require("./model/user.model.js");
-const PORT = 5000;
+const PORT = 3000;
 
-app.get('/',(req, resp)=>{
-resp.send("Hello Mimi!")
+app.get("/", (req, resp) => {
+  resp.send("Hello Mimi!");
 });
 
-app.listen(PORT,()=>{
-console.log('Server Started');
+app.listen(PORT, () => {
+  console.log("Server Started");
 });

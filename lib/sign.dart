@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'login.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -11,83 +9,80 @@ class SignIn extends StatefulWidget {
   State<SignIn> createState() => _SignInState();
 }
 
-class _SignInState extends State<SignIn>{
+class _SignInState extends State<SignIn> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   bool isNotValid = false;
 
-  void signIn() async{
-    if(emailController.text.isNotEmpty && nameController.text.isNotEmpty) {
-      var regBody = {
-        "email" : emailController.text,
-        "name" : nameController.text,
-      };
-
-      var response = await http.post(Uri.parse('uri'),
-        headers: {"Content-Type":"application/json"},
-        body: jsonEncode(regBody)
-      );
-    }else{
-      setState(() {
-        isNotValid = true;
-      });
-    }
-  }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFFFC6C9),
-        title: Column(
-          children: [
-            const SizedBox(
-              height: 15,
-            ),
-            Text(
-              "Sign Up",
-              style: GoogleFonts.nunito(
-                fontWeight: FontWeight.w500,
-                fontSize: 40,
-                color: Colors.black,
-              ),
-            ),
-          ],
-        ),
-        centerTitle: true,
-      ),
       body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color(0xFFFFC6C9),
-              Color(0xFFFFD7BE),
-            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFFFFF4F5), // Lighter shade of #E6B8BB
+              Color(0xFFE0C2B9), // Lighter shade of #D4B3A9
+            ],
           ),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(
-              height: 70,
+              height: 20,
             ),
+            Text(
+              'Sign Up',
+              style: GoogleFonts.pacifico(
+                // Using a stylish font for the header
+                textStyle: const TextStyle(
+                  fontSize: 40,
+                  color: Colors.black,
+                  shadows: [
+                    Shadow(
+                      offset: Offset(1, 1),
+                      blurRadius: 4,
+                      color: Colors.grey,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 50),
             SizedBox(
               width: 300,
-              height: 45,
+              height: 50,
               child: TextField(
                 controller: nameController,
+                style: const TextStyle(color: Colors.black),
                 decoration: InputDecoration(
-                    border: InputBorder.none,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(width: 1),
-                      borderRadius: BorderRadius.circular(7),
-                      gapPadding: 12,
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(
+                      0.9), // Added background color for input fields
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                        12), // Rounded corners for a softer look
+                    borderSide: BorderSide(
+                      color: Colors.grey[400]!, // Soft border color
+                      width: 1.5,
                     ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors
+                          .grey[300]!, // Accent color for focused state
+                      width: 2.0,
+                    ),
+                  ),
+                  prefixIcon: Icon(Icons.email, color: Colors.grey[500]),
                   hintText: "Name",
-                  isDense: true,
+                  hintStyle: TextStyle(color: Colors.grey[500]),
                 ),
               ),
             ),
@@ -96,64 +91,134 @@ class _SignInState extends State<SignIn>{
             ),
             SizedBox(
               width: 300,
-              height: 45,
+              height: 50,
               child: TextField(
                 controller: emailController,
+                obscureText: true,
+                style: const TextStyle(color: Colors.black),
                 decoration: InputDecoration(
-                    border : InputBorder.none,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(7),
-                      borderSide: const BorderSide(width: 1),
-                      gapPadding: 12,
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.9),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.grey[400]!,
+                      width: 1.5,
                     ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.grey[300]!,
+                      width: 2.0,
+                    ),
+                  ),
+                  prefixIcon: Icon(Icons.lock, color: Colors.grey[500]),
                   hintText: "Number/Email",
-                  isDense: true,
+                  hintStyle: TextStyle(color: Colors.grey[500]),
                 ),
               ),
             ),
             const SizedBox(
-              height: 15,
-            ),
-            const SizedBox(
-              height: 15,
+              height: 30,
             ),
             SizedBox(
               width: 300,
-              height: 45,
+              height: 50,
               child: ElevatedButton(
-                onPressed: (){
-                  signIn();
+                onPressed: () {
+                  // signIn();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red[300],
-                  elevation: 1.5,
+                  elevation: 5,
+                  shadowColor: Colors.deepPurple
+                      .withOpacity(0.5), // Added shadow for depth
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(7)
+                    borderRadius: BorderRadius.circular(
+                        12), // Rounded corners for consistency
                   ),
                 ),
                 child: const Text(
                   "Sign up",
                   style: TextStyle(
                     color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
                   ),
                 ),
               ),
             ),
             TextButton(
-              onPressed: (){
+              onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginClass(),
-                    ),
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginClass(),
+                  ),
                 );
               },
-              child: const Text(
+              child: Text(
                 "Already have an account? LogIn",
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.red,
+                style: GoogleFonts.roboto(
+                  textStyle: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+            ),
+            const Row(
+              children: [
+                Expanded(
+                  child: Divider(
+                    color: Colors.grey,
+                    thickness: 1,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text("or"),
+                ),
+                Expanded(
+                  child: Divider(
+                    color: Colors.grey,
+                    thickness: 1,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 15,),
+            Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 2.0,
+                  ),
+                  borderRadius: BorderRadius.circular(12)
+                ),
+                child: SizedBox(
+                  width: 300,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      elevation: 5,
+                      shadowColor: Colors.deepPurple
+                          .withOpacity(0.5),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text(
+                      "Sign Up with Google",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'sign.dart';
+
 class LoginClass extends StatefulWidget {
   const LoginClass({super.key});
 
@@ -10,107 +11,155 @@ class LoginClass extends StatefulWidget {
 
 class _LoginClassState extends State<LoginClass> {
   TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
-  void loginUser()async{
-    if(emailController.text.isNotEmpty ){
-
+  void loginUser() async {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      // Add your login logic here
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFFFC6C9),
-        title: Text(
-            "Login",
-            style: GoogleFonts.nunito(
-              fontWeight: FontWeight.w500,
-              fontSize: 40,
-              color: Colors.black,
-            ),
-        ),
-        centerTitle: true,
-      ),
       body: Container(
         width: double.infinity,
-        height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color(0xFFFFC6C9),
-              Color(0xFFFFD7BE),
-            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFFFFF4F5), // Lighter shade of #E6B8BB
+              Color(0xFFE0C2B9), // Lighter shade of #D4B3A9
+            ],
           ),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(
-              height: 70,
-            ),
-            SizedBox(
-              width: 300,
-              height: 45,
-              child: TextField(
-                controller: emailController,
-                decoration: InputDecoration(
-                  border : InputBorder.none,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(width: 1),
-                      gapPadding: 12,
+            const SizedBox(height: 20),
+            // App name with the same style as the signup page
+            Text(
+              'Sign In',
+              style: GoogleFonts.pacifico(
+                textStyle: const TextStyle(
+                  fontSize: 40,
+                  color: Colors.black,
+                  shadows: [
+                    Shadow(
+                      offset: Offset(1, 1),
+                      blurRadius: 4,
+                      color: Colors.grey,
                     ),
-                  hintText: "Number/Email",
-                  helperStyle: TextStyle(color: Colors.grey[500]),
-                  isDense: true,
+                  ],
                 ),
               ),
             ),
-            const SizedBox(
-              height: 15,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
+            const SizedBox(height: 50),
+            // Email input field with matching style
             SizedBox(
               width: 300,
-              height: 45,
-              child: ElevatedButton(
-                  onPressed: (){
-                    loginUser();
-                  },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red[300],
-                  elevation: 1.5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)
-                  ),
-                ),
-                  child: const Text(
-                    "LogIn",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 20,
+              height: 50,
+              child: TextField(
+                controller: emailController,
+                style: const TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.9),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.grey[400]!, // Matching light border color
+                      width: 1.5, // Matching border width
                     ),
                   ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.deepPurple[300]!, // Focused state color
+                      width: 2.0,
+                    ),
+                  ),
+                  prefixIcon: Icon(Icons.email, color: Colors.grey[500]),
+                  hintText: "Number/Email",
+                  hintStyle: TextStyle(color: Colors.grey[500]),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            // Password input field with matching style
+            SizedBox(
+              width: 300,
+              height: 50,
+              child: TextField(
+                controller: passwordController,
+                obscureText: true, // To mask the password
+                style: const TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.9),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.grey[400]!, // Matching light border color
+                      width: 1.5, // Matching border width
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.deepPurple[300]!, // Focused state color
+                      width: 2.0,
+                    ),
+                  ),
+                  prefixIcon: Icon(Icons.lock, color: Colors.grey[500]),
+                  hintText: "Password",
+                  hintStyle: TextStyle(color: Colors.grey[500]),
+                ),
+              ),
+            ),
+            const SizedBox(height: 30),
+            // Login button with matching style
+            SizedBox(
+              width: 300,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {
+                  loginUser();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red[300], // Matching button color
+                  elevation: 5,
+                  shadowColor: Colors.deepPurple.withOpacity(0.5), // Matching shadow color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text(
+                  "Log In",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Colors.white, // Matching text color
+                  ),
+                ),
               ),
             ),
             TextButton(
-              onPressed: (){
+              onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const SignIn(),
-                  ),
+                  MaterialPageRoute(builder: (context) => const SignIn()),
                 );
               },
-              child: const Text(
+              child: Text(
                 "Create new Account? SignUp",
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.red,
+                style: GoogleFonts.roboto(
+                  textStyle: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.red, // Matching link color
+                  ),
                 ),
               ),
             ),
