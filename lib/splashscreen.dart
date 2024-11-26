@@ -13,29 +13,31 @@ class _SplashscreenState extends State<Splashscreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 4), (){
+    Future.delayed(const Duration(seconds: 4), () {
       Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const ChoiceClass(),
-      ),
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ChoiceClass(),
+        ),
       );
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         width: double.infinity,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xFFFFD9DC),
-                Color(0xFFFFE5D8),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFFFFD9DC),
+              Color(0xFFFFE5D8),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
+        ),
         child: Center(
           child: Text(
             "YummyMate",

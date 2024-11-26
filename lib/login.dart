@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/location/location.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'sign.dart';
 
@@ -61,7 +62,13 @@ class _LoginClassState extends State<LoginClass> {
             SizedBox(
               width: 300,
               height: 50,
-              child: TextField(
+              child: TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'This field is required';
+                  }
+                  return null;
+                },
                 controller: emailController,
                 style: const TextStyle(color: Colors.black),
                 decoration: InputDecoration(
@@ -92,7 +99,13 @@ class _LoginClassState extends State<LoginClass> {
             SizedBox(
               width: 300,
               height: 50,
-              child: TextField(
+              child: TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'This field is required';
+                  }
+                  return null;
+                },
                 controller: passwordController,
                 obscureText: true, // To mask the password
                 style: const TextStyle(color: Colors.black),
@@ -127,11 +140,17 @@ class _LoginClassState extends State<LoginClass> {
               child: ElevatedButton(
                 onPressed: () {
                   loginUser();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LocationAccess(),
+                      ));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red[300], // Matching button color
                   elevation: 5,
-                  shadowColor: Colors.deepPurple.withOpacity(0.5), // Matching shadow color
+                  shadowColor: Colors.deepPurple
+                      .withOpacity(0.5), // Matching shadow color
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),

@@ -12,7 +12,18 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   bool isNotValid = false;
+
+  void registerUser() async {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+    } else {
+      setState(() {
+        isNotValid = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +35,8 @@ class _SignInState extends State<SignIn> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFFFFF4F5), // Lighter shade of #E6B8BB
-              Color(0xFFE0C2B9), // Lighter shade of #D4B3A9
+              Color(0xFFFFF4F5),
+              Color(0xFFE0C2B9),
             ],
           ),
         ),
@@ -75,8 +86,8 @@ class _SignInState extends State<SignIn> {
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(
-                      color: Colors
-                          .grey[300]!, // Accent color for focused state
+                      color:
+                          Colors.grey[300]!, // Accent color for focused state
                       width: 2.0,
                     ),
                   ),
@@ -125,9 +136,75 @@ class _SignInState extends State<SignIn> {
             SizedBox(
               width: 300,
               height: 50,
+              child: TextField(
+                controller: emailController,
+                obscureText: true,
+                style: const TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.9),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.grey[400]!,
+                      width: 1.5,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.grey[300]!,
+                      width: 2.0,
+                    ),
+                  ),
+                  prefixIcon: Icon(Icons.lock, color: Colors.grey[500]),
+                  hintText: "Number/Email",
+                  hintStyle: TextStyle(color: Colors.grey[500]),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            SizedBox(
+              width: 300,
+              height: 50,
+              child: TextField(
+                controller: emailController,
+                obscureText: true,
+                style: const TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.9),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.grey[400]!,
+                      width: 1.5,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.grey[300]!,
+                      width: 2.0,
+                    ),
+                  ),
+                  prefixIcon: Icon(Icons.lock, color: Colors.grey[500]),
+                  hintText: "Number/Email",
+                  hintStyle: TextStyle(color: Colors.grey[500]),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            SizedBox(
+              width: 300,
+              height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  // signIn();
+                  registerUser();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red[300],
@@ -172,55 +249,24 @@ class _SignInState extends State<SignIn> {
               children: [
                 Expanded(
                   child: Divider(
-                    color: Colors.grey,
+                    color: Colors.black45,
                     thickness: 1,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text("or"),
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Text("OR"),
                 ),
                 Expanded(
                   child: Divider(
-                    color: Colors.grey,
+                    color: Colors.black45,
                     thickness: 1,
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 15,),
-            Center(
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 2.0,
-                  ),
-                  borderRadius: BorderRadius.circular(12)
-                ),
-                child: SizedBox(
-                  width: 300,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      elevation: 5,
-                      shadowColor: Colors.deepPurple
-                          .withOpacity(0.5),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Text(
-                      "Sign Up with Google",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+            const SizedBox(
+              height: 15,
             ),
           ],
         ),
